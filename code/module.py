@@ -6,7 +6,7 @@ import requests, json
 import time
 import datetime
 
-def main_flask(url,cap = 0,start = None,time_ref = 10,polygon_employ=None, polygon_nodetect=None):
+def main_flask(device_name,url,cap = 0,start = None,time_ref = 10,polygon_employ=None, polygon_nodetect=None):
     cap = cv2.VideoCapture(cap)
 
     while True:
@@ -19,7 +19,7 @@ def main_flask(url,cap = 0,start = None,time_ref = 10,polygon_employ=None, polyg
         if end - start > time_ref:
             imencoded = cv2.imencode(".jpg", frame)[1]
             if url != None:
-                status_code = request_post_image(url,imencoded,polygon_employ,polygon_nodetect)
+                status_code = request_post_image(device_name,url,imencoded,polygon_employ,polygon_nodetect)
                 start = None
                 if status_code != 200:
                     print('break')
@@ -32,9 +32,9 @@ def main_flask(url,cap = 0,start = None,time_ref = 10,polygon_employ=None, polyg
     cv2.destroyAllWindows()
     return status_code
 
-def request_post_image(url, image,polygon_employ,polygon_nodetect):
+def request_post_image(device_name,url, image,polygon_employ,polygon_nodetect):
     file = {'file': ('image.jpg', image.tostring(), 'image/jpeg', {'Expires': '0'})}
-    data = {'poly_employ': polygon_employ,'poly_nodetect': polygon_nodetect}
+    data = {"people_device": device_name,'poly_employ': polygon_employ,'poly_nodetect': polygon_nodetect}
     post_img = requests.post(url, files=file)
     if post_img.status_code == 200:
         response = requests.post(url, json=data)
