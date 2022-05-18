@@ -1,5 +1,10 @@
 import cv2
 import os
+import numpy as np
+from configparser import ConfigParser
+import requests, json
+import time
+import datetime
 
 def main_flask(url,cap = 0,start = None,time_ref = 10,polygon_employ=None, polygon_nodetect=None):
     cap = cv2.VideoCapture(cap)
