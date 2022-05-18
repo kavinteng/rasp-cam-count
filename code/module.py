@@ -12,16 +12,16 @@ def main_flask(url,cap = 0,start = None,time_ref = 10,polygon_employ=None, polyg
 
         if end - start > time_ref:
             imencoded = cv2.imencode(".jpg", frame)[1]
-            status_code = request_post_image(url,imencoded,polygon_employ,polygon_nodetect)
-            start = None
+            if url != None:
+                status_code = request_post_image(url,imencoded,polygon_employ,polygon_nodetect)
+                start = None
+                if status_code != 200:
+                    print('break')
+                    break
 
-            cv2.waitKey(1)
-            if status_code != 200:
-                print('break')
-                break
-
-
-
+        cv2.imshow('frame',frame)
+        cv2.waitKey(1)
+        
     cap.release()
     cv2.destroyAllWindows()
     return status_code
