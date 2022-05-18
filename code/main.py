@@ -13,6 +13,6 @@ if os.path.isfile('config.ini') == False:
 
 polygon_employ, polygon_nodetect = read_polygon_value()
 
-statuscode_out = main_flask(device_name,list_url[4],cap=list_cap[0],
+statuscode_out = main_flask(device_name,list_url[3],cap=list_cap[0],
                             time_ref = 10,polygon_employ=polygon_employ,
                             polygon_nodetect=polygon_nodetect)
