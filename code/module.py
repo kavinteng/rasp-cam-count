@@ -1,4 +1,5 @@
 import cv2
+import os
 
 def main_flask(url,cap = 0,start = None,time_ref = 10,polygon_employ=None, polygon_nodetect=None):
     cap = cv2.VideoCapture(cap)
@@ -21,7 +22,7 @@ def main_flask(url,cap = 0,start = None,time_ref = 10,polygon_employ=None, polyg
 
         cv2.imshow('frame',frame)
         cv2.waitKey(1)
-        
+
     cap.release()
     cv2.destroyAllWindows()
     return status_code
