@@ -105,3 +105,33 @@ def set_polygon():
     cv2.destroyAllWindows()
 
     return result1, result2
+
+def click_event(event, x, y, flags, params):
+    global array1,array2, img
+    if event == cv2.EVENT_LBUTTONDOWN:
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        # print(x, ",", y)
+        cv2.putText(img, str(x) + ',' +
+                    str(y), (x, y), font,
+                    1, (255, 0, 0), 2)
+        array1.append([x, y])
+        array2.append([x, y])
+        cv2.imshow('image', img)
+
+def write_polygon_value(polygon_employ,polygon_nodetect):
+    write_config = ConfigParser()
+    write_config.add_section('polygon')
+    write_config.set('polygon', 'polygon_employ',str(polygon_employ))
+    write_config.set('polygon', 'polygon_no_detect', str(polygon_nodetect))
+    cfgfile = open('config.ini','w')
+    write_config.write(cfgfile)
+    cfgfile.close()
+
+def read_polygon_value():
+    read_config = ConfigParser()
+    read_config.read('config.ini')
+    polygon_employ = read_config.get('polygon','polygon_employ')
+    polygon_nodetect = read_config.get('polygon', 'polygon_no_detect')
+    polygon_employ = json.loads(polygon_employ)
+    polygon_nodetect = json.loads(polygon_nodetect)
+    return polygon_employ,polygon_nodetect
