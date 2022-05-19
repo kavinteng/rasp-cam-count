@@ -1,7 +1,7 @@
 import torch
 import cv2
 
-model = torch.hub.load('ultralytics/yolov5', 'yolov5l', pretrained=True)
+model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
 model.conf = 0.5
 model.iou = 0.4
 
