@@ -21,7 +21,7 @@ while True:
             ymin = int(out2.iat[i, 1])
             xmax = int(out2.iat[i, 2])
             ymax = int(out2.iat[i, 3])
-
+            obj_name = out2.iat[i, 6]
             if obj_name == 'person' or obj_name == '0':
                 cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), color, 2)
 
